@@ -1,14 +1,21 @@
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
-
-.icon-block {
-  padding: 0 15px;
+th {
+  text-align: left;
 }
-.icon-block .material-icons {
-	font-size: inherit;
+
+h1, h3 {
+  font-family: "Arial";
+}
+
+li {
+  font-family: "Arial";
+  font-size: 14px;
+}
+
+button {
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
 }
