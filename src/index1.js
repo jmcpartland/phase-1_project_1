@@ -1,56 +1,42 @@
-const congressMembers = 'https://api.propublica.org/congress/v1/116/senate/members.json'
+
+// ProPublica Data Store: Congress API
+// https://www.propublica.org/datastore/api/propublica-congress-api
+
+// let allSenators = [];
+
+const senateMembers = 'https://api.propublica.org/congress/v1/117/senate/members.json'
 const propublicaKey = 'tNm5YIP9zO7SCYymYDfjB73IRmhUzMmC8beETVXI'
 
 const tr = document.querySelector('tr');
 const td = document.querySelector('td');
 
-fetch(congressMembers, {
+fetch(senateMembers, {
     headers: {
-        "X-API-Key" : propublicaKey
+        'X-API-Key' : propublicaKey
     }
 })
 .then(response => response.json())
 .then(result => result.results[0].members.forEach(name => congressNames(name)));
 
+// .then(result => result.results[0].members.forEach(name => allSenators.push(name)));
+
+// const rSenators = allSenators.filter(member => member.party == 'R')
+// console.log(rSenators);
+
+
+
 function congressNames(name) {
-  console.log(name.first_name + ' ' + name.last_name + '-' + name.party + '\n ' + name.state)
+  const memberList = document.querySelector('.memberList')
+  const li = document.createElement('li')
+  li.appendChild(document.createTextNode(name.first_name + ' ' + name.last_name + ' (' + name.party + ') ' + name.state))
+  memberList.appendChild(li)
 };
 
 
-function generateTable(name) {
-  const congressName = `${name.first_name} ${name.last_name}`
 
-  // get the reference for the body
-  var body = document.getElementsByTagName("body")[0];
-
-  // creates a <table> element and a <tbody> element
-  var tbl = document.querySelector("table");
-  var tblBody = document.querySelector("tbody");
-
-  // creating all cells
-//   for (var i = 0; i < 2; i++) {
-    // creates a table row
-    var row = document.createElement("tr");
-
-    for (var j = 0; j < 2; j++) {
-      // Create a <td> element and a text node, make the text
-      // node the contents of the <td>, and put the <td> at
-      // the end of the table row
-      var cell = document.createElement("td");
-      cell.innerHTML = `${congressName}, ${name.state}`
-//       var cellText = document.createTextNode(`${congressName}, ${name.state}`);
-//       cell.appendChild(cellText);
-      row.appendChild(cell);
-    }
-
-    // add the row to the end of the table body
-    tblBody.appendChild(row);
-//   }
-
-  // put the <tbody> in the <table>
-  tbl.appendChild(tblBody);
-  // appends <table> into <body>
-  body.appendChild(tbl);
-  // sets the border attribute of tbl to 2;
-  tbl.setAttribute("border", "1");
+function allSenators(name) {
+  if (name.party == 'R')
+  console.log(name)
 }
+
+// console.log(allSenators());

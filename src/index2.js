@@ -1,25 +1,24 @@
 // ProPublica Data Store: Congress API
 // https://www.propublica.org/datastore/api/propublica-congress-api
 
-// document.addEventListener('DOMContentLoaded', (event) => {
-//   ​​
-// });
-
-
-
 const senateMembers = 'https://api.propublica.org/congress/v1/117/senate/members.json'
 const propublicaKey = 'tNm5YIP9zO7SCYymYDfjB73IRmhUzMmC8beETVXI'
+
+const tr = document.querySelector('tr');
+const td = document.querySelector('td');
+
 
 let allSenators = [];
 
 fetch(senateMembers, {
-  headers: {
-    'X-API-Key' : propublicaKey
-  }
+    headers: {
+        'X-API-Key' : propublicaKey
+    }
 })
-.then(response => response.json())
-.then(data => returnedData(data))
+  .then(response => response.json())
+  .then(data => returnedData(data))
 
+  
 function returnedData(data) {
   return data.results[0].members.forEach(name => allSenators.push(name))
 };
@@ -27,26 +26,13 @@ function returnedData(data) {
 
 function democratSenators() {
   const dSenators = allSenators.filter(member => member.party == 'D')
-  namesList(dSenators)
+  namesList(dSenators);
 };
-const idDemocrats = document.getElementById('democrats');
-idDemocrats.addEventListener('click', event => democratSenators())
-
 
 function republicanSenators() {
   const rSenators = allSenators.filter(member => member.party == 'R')
   namesList(rSenators);
 };
-const idRepublicans = document.getElementById('republicans')
-idRepublicans.addEventListener('click', event => republicanSenators())
-
-
-function independentSenators() {
-  const iSenators = allSenators.filter(member => member.party == 'ID')
-  namesList(iSenators);
-};
-const idIndependents = document.getElementById('independents')
-idIndependents.addEventListener('click', event => independentSenators())
 
 
 function namesList(senators) {
