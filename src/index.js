@@ -48,12 +48,21 @@ idIndependents.addEventListener('click', event => independentSenators())
 
 
 const memberList = document.querySelector('.memberList')
+const rowCard = document.querySelector('.row')
+
 
 function namesList(senators) {
-  // memberList.target.parentNode.remove()
   for (s of senators) {
-    const li = document.createElement('li')
-    li.appendChild(document.createTextNode(s.first_name + ' ' + s.last_name + ' (' + s.party + ') ' + s.state))
-    memberList.appendChild(li)
+    const firstLastName = `${s.first_name} ${s.last_name}`
+
+    const cardColumn = document.createElement('div')
+    cardColumn.className = 'column'
+
+    const card = document.createElement('div')
+    card.className = 'card'
+    card.innerHTML = firstLastName
+    
+    cardColumn.appendChild(card)
+    rowCard.appendChild(cardColumn)
   }
 };

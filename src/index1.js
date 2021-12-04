@@ -23,25 +23,34 @@ function returnedData(data) {
 };
 
 
-
-
-
-
-
 function democratSenators() {
   const dSenators = allSenators.filter(member => member.party == 'D')
   namesList(dSenators)
 };
+const idDemocrats = document.getElementById('democrats');
+idDemocrats.addEventListener('click', event => democratSenators())
 
 
-const btnDemocrats = document.getElementById('democrats');
-btnDemocrats.addEventListener('click', event => democratSenators())
+function republicanSenators() {
+  const rSenators = allSenators.filter(member => member.party == 'R')
+  namesList(rSenators);
+};
+const idRepublicans = document.getElementById('republicans')
+idRepublicans.addEventListener('click', event => republicanSenators())
 
+
+function independentSenators() {
+  const iSenators = allSenators.filter(member => member.party == 'ID')
+  namesList(iSenators);
+};
+const idIndependents = document.getElementById('independents')
+idIndependents.addEventListener('click', event => independentSenators())
 
 
 const memberList = document.querySelector('.memberList')
 
 function namesList(senators) {
+  // memberList.target.parentNode.remove()
   for (s of senators) {
     const li = document.createElement('li')
     li.appendChild(document.createTextNode(s.first_name + ' ' + s.last_name + ' (' + s.party + ') ' + s.state))
