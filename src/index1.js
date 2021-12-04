@@ -1,42 +1,50 @@
-
 // ProPublica Data Store: Congress API
 // https://www.propublica.org/datastore/api/propublica-congress-api
 
-// let allSenators = [];
+document.addEventListener('DOMContentLoaded', event => getSenators());
 
 const senateMembers = 'https://api.propublica.org/congress/v1/117/senate/members.json'
 const propublicaKey = 'tNm5YIP9zO7SCYymYDfjB73IRmhUzMmC8beETVXI'
 
-const tr = document.querySelector('tr');
-const td = document.querySelector('td');
+let allSenators = [];
 
-fetch(senateMembers, {
+function getSenators() {
+  fetch(senateMembers, {
     headers: {
-        'X-API-Key' : propublicaKey
+      'X-API-Key' : propublicaKey
     }
-})
-.then(response => response.json())
-.then(result => result.results[0].members.forEach(name => congressNames(name)));
+  })
+    .then(response => response.json())
+    .then(data => returnedData(data))
+};
 
-// .then(result => result.results[0].members.forEach(name => allSenators.push(name)));
-
-// const rSenators = allSenators.filter(member => member.party == 'R')
-// console.log(rSenators);
-
-
-
-function congressNames(name) {
-  const memberList = document.querySelector('.memberList')
-  const li = document.createElement('li')
-  li.appendChild(document.createTextNode(name.first_name + ' ' + name.last_name + ' (' + name.party + ') ' + name.state))
-  memberList.appendChild(li)
+function returnedData(data) {
+  return data.results[0].members.forEach(name => allSenators.push(name))
 };
 
 
 
-function allSenators(name) {
-  if (name.party == 'R')
-  console.log(name)
-}
 
-// console.log(allSenators());
+
+
+
+function democratSenators() {
+  const dSenators = allSenators.filter(member => member.party == 'D')
+  namesList(dSenators)
+};
+
+
+const btnDemocrats = document.getElementById('democrats');
+btnDemocrats.addEventListener('click', event => democratSenators())
+
+
+
+const memberList = document.querySelector('.memberList')
+
+function namesList(senators) {
+  for (s of senators) {
+    const li = document.createElement('li')
+    li.appendChild(document.createTextNode(s.first_name + ' ' + s.last_name + ' (' + s.party + ') ' + s.state))
+    memberList.appendChild(li)
+  }
+};
