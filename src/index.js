@@ -54,14 +54,21 @@ const rowCard = document.querySelector('.row')
 function namesList(senators) {
   for (s of senators) {
     const firstLastName = `${s.first_name} ${s.last_name}`
+    const memberId = s.id
 
+    const br = document.createElement('br')
+    const memberImageTag = document.createElement('img')
+    memberImageTag.className = 'memberPhoto'
+    memberImageTag.src = `https://theunitedstates.io/images/congress/225x275/${memberId}.jpg`
+        
     const cardColumn = document.createElement('div')
     cardColumn.className = 'column'
 
     const card = document.createElement('div')
     card.className = 'card'
-    card.innerHTML = firstLastName
-    
+    card.innerHTML = `${firstLastName} <br><br>`
+    card.appendChild(memberImageTag)
+
     cardColumn.appendChild(card)
     rowCard.appendChild(cardColumn)
   }
