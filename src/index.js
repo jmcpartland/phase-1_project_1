@@ -7,7 +7,7 @@ const senateMembers = 'https://api.propublica.org/congress/v1/117/senate/members
 const propublicaKey = 'tNm5YIP9zO7SCYymYDfjB73IRmhUzMmC8beETVXI'
 
 const memberList = document.querySelector('.memberList')
-const listCard = document.querySelector('.list')
+const cardList = document.querySelector('.list')
 
 let allSenators = [];
 
@@ -27,7 +27,7 @@ function returnedData(data) {
 
 
 function democratSenators() {
-  listCard.innerHTML = ''
+  cardList.innerHTML = ''
   const democratsButton = allSenators.filter(member => member.party == 'D')
   namesList(democratsButton)
 };
@@ -36,7 +36,7 @@ idDemocrats.addEventListener('click', event => democratSenators())
 
 
 function republicanSenators() {
-  listCard.innerHTML = ''
+  cardList.innerHTML = ''
   const republicansButton = allSenators.filter(member => member.party == 'R')
   namesList(republicansButton);
 };
@@ -45,7 +45,7 @@ idRepublicans.addEventListener('click', event => republicanSenators())
 
 
 function independentSenators() {
-  listCard.innerHTML = ''
+  cardList.innerHTML = ''
   const independentsButton = allSenators.filter(member => member.party == 'ID')
   namesList(independentsButton);
 };
@@ -53,30 +53,32 @@ const idIndependents = document.getElementById('independents')
 idIndependents.addEventListener('click', event => independentSenators())
 
 
-
-
 function namesList(senators) {
+ 
   for (s of senators) {
     const firstLastName = `${s.first_name} ${s.last_name}`
     const memberId = s.id
 
-    // const br = document.createElement('br')
     const memberImageTag = document.createElement('img')
-    memberImageTag.className = 'memberPhoto'
+    memberImageTag.addEventListener('mouseenter', (event) => event.target.style.border = '5px solid black');
+    memberImageTag.addEventListener('mouseleave', (event) => event.target.style.border = '0');  
+    memberImageTag.className = 'member-photo'
     memberImageTag.src = `https://theunitedstates.io/images/congress/225x275/${memberId}.jpg`
         
     const cardColumn = document.createElement('div')
     cardColumn.className = 'column'
 
-    const card = document.createElement('p')
+    const card = document.createElement('div')
+    const pTag = document.createElement('p')
+
     card.className = 'card'
-    card.textContent = firstLastName
+    pTag.textContent = firstLastName
 
-    // memberImageTag.after(card)
     card.appendChild(memberImageTag)
-
-    // cardColumn.appendChild(card)
-    // console.log(cardColumn)
-    listCard.appendChild(card)
+    card.appendChild(pTag)
+    
+    cardList.appendChild(card)
+    
+    // console.log(cardList)
   }
 };

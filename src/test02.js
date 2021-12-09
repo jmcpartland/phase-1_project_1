@@ -79,3 +79,7 @@ function namesList(senators) {
 
   }
 };
+
+
+
+memberImageTag.addEventListener('mouseenter', (event) => event.target.style.transform = 'translate(rotate(90deg))')
