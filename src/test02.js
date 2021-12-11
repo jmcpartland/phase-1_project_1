@@ -71,9 +71,7 @@ function namesList(senators) {
     card.innerHTML = `${firstLastName} <br><br>`
     
     p.appendChild(card)
-    // memberImageTag.appendChild(card)
     listCards.appendChild(p)
-    // listCards.appendChild(p)
     
     console.log(listCards)
 

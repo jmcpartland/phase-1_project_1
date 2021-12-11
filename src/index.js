@@ -29,7 +29,7 @@ function returnedData(data) {
 function democratSenators() {
   cardList.innerHTML = ''
   const democratsButton = allSenators.filter(member => member.party == 'D')
-  namesList(democratsButton)
+  membersList(democratsButton)
 };
 const idDemocrats = document.getElementById('democrats');
 idDemocrats.addEventListener('click', event => democratSenators())
@@ -38,7 +38,7 @@ idDemocrats.addEventListener('click', event => democratSenators())
 function republicanSenators() {
   cardList.innerHTML = ''
   const republicansButton = allSenators.filter(member => member.party == 'R')
-  namesList(republicansButton);
+  membersList(republicansButton);
 };
 const idRepublicans = document.getElementById('republicans')
 idRepublicans.addEventListener('click', event => republicanSenators())
@@ -47,13 +47,13 @@ idRepublicans.addEventListener('click', event => republicanSenators())
 function independentSenators() {
   cardList.innerHTML = ''
   const independentsButton = allSenators.filter(member => member.party == 'ID')
-  namesList(independentsButton);
+  membersList(independentsButton);
 };
 const idIndependents = document.getElementById('independents')
 idIndependents.addEventListener('click', event => independentSenators())
 
 
-function namesList(senators) {
+function membersList(senators) {
  
   for (s of senators) {
     const firstLastName = `${s.first_name} ${s.last_name}`
