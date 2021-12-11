@@ -60,8 +60,11 @@ function namesList(senators) {
     const memberId = s.id
 
     const memberImageTag = document.createElement('img')
-    memberImageTag.addEventListener('mouseenter', (event) => event.target.style.border = '5px solid black');
-    memberImageTag.addEventListener('mouseleave', (event) => event.target.style.border = '0');  
+    
+    // memberImageTag.addEventListener('mouseenter', (event) => window.onclick = e => console.dir(e.target.style));
+    memberImageTag.addEventListener('mouseenter', (event) => event.target.style.opacity = '50%');
+    memberImageTag.addEventListener('mouseleave', (event) => event.target.style.opacity = '100%');
+
     memberImageTag.className = 'member-photo'
     memberImageTag.src = `https://theunitedstates.io/images/congress/225x275/${memberId}.jpg`
         
@@ -79,6 +82,5 @@ function namesList(senators) {
     
     cardList.appendChild(card)
     
-    // console.log(cardList)
   }
 };
