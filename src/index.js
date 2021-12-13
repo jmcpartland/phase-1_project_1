@@ -28,8 +28,8 @@ function returnedData(data) {
 
 function democratSenators() {
   cardList.innerHTML = ''
-  const democratsButton = allSenators.filter(member => member.party == 'D')
-  membersList(democratsButton)
+  const democratsFilter = allSenators.filter(member => member.party == 'D')
+  membersList(democratsFilter)
 };
 const idDemocrats = document.getElementById('democrats');
 idDemocrats.addEventListener('click', event => democratSenators())
@@ -37,8 +37,8 @@ idDemocrats.addEventListener('click', event => democratSenators())
 
 function republicanSenators() {
   cardList.innerHTML = ''
-  const republicansButton = allSenators.filter(member => member.party == 'R')
-  membersList(republicansButton);
+  const republicansFilter = allSenators.filter(member => member.party == 'R')
+  membersList(republicansFilter);
 };
 const idRepublicans = document.getElementById('republicans')
 idRepublicans.addEventListener('click', event => republicanSenators())
@@ -46,11 +46,12 @@ idRepublicans.addEventListener('click', event => republicanSenators())
 
 function independentSenators() {
   cardList.innerHTML = ''
-  const independentsButton = allSenators.filter(member => member.party == 'ID')
-  membersList(independentsButton);
+  const independentsFilter = allSenators.filter(member => member.party == 'ID')
+  membersList(independentsFilter);
 };
 const idIndependents = document.getElementById('independents')
 idIndependents.addEventListener('click', event => independentSenators())
+
 
 
 function membersList(senators) {
@@ -59,15 +60,25 @@ function membersList(senators) {
     const firstLastName = `${s.first_name} ${s.last_name}`
     const memberId = s.id
 
+    let headshot = `https://theunitedstates.io/images/congress/225x275/${memberId}.jpg`
+    let headshotSilhouette = 'https://static.propublica.org/rails/assets/congress/silhouette_male-eb244690d4f7eee39ace3ca9cb41fa44f908b1677ba256fc2522496917d2af02.png'
+
     const memberImageTag = document.createElement('img')
     
-    // memberImageTag.addEventListener('mouseenter', (event) => window.onclick = e => console.dir(e.target.style));
     memberImageTag.addEventListener('mouseenter', (event) => event.target.style.opacity = '50%');
     memberImageTag.addEventListener('mouseleave', (event) => event.target.style.opacity = '100%');
 
     memberImageTag.className = 'member-photo'
-    memberImageTag.src = `https://theunitedstates.io/images/congress/225x275/${memberId}.jpg`
-        
+    
+    fetch(headshot).then(function(response) {
+        if (response.status == 200) {
+          memberImageTag.src = headshot
+        } else {
+          memberImageTag.src = headshotSilhouette
+        }
+      })
+
+
     const cardColumn = document.createElement('div')
     cardColumn.className = 'column'
 
@@ -84,3 +95,4 @@ function membersList(senators) {
     
   }
 };
+

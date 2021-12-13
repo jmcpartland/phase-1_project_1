@@ -1,12 +1,6 @@
-
-h1, h3 {
-  font-family: "Arial";
-}
-
-body {
+h1, h3, body {
   font-family: Arial, Helvetica, sans-serif;
 }
-
 
 button {
   background-color: blue;
