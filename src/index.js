@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', event => getSenators());
 const senateMembers = 'https://api.propublica.org/congress/v1/117/senate/members.json'
 const propublicaKey = 'tNm5YIP9zO7SCYymYDfjB73IRmhUzMmC8beETVXI'
 
-const memberList = document.querySelector('.memberList')
 const cardList = document.querySelector('.list')
 
 let allSenators = [];
@@ -63,21 +62,19 @@ function membersList(senators) {
     let headshot = `https://theunitedstates.io/images/congress/225x275/${memberId}.jpg`
     let headshotSilhouette = 'https://static.propublica.org/rails/assets/congress/silhouette_male-eb244690d4f7eee39ace3ca9cb41fa44f908b1677ba256fc2522496917d2af02.png'
 
-    const memberImageTag = document.createElement('img')
+    const headshotTag = document.createElement('img')
+    headshotTag.addEventListener('mouseenter', (event) => event.target.style.opacity = '50%');
+    headshotTag.addEventListener('mouseleave', (event) => event.target.style.opacity = '100%');
+    headshotTag.className = 'member-headshot'
     
-    memberImageTag.addEventListener('mouseenter', (event) => event.target.style.opacity = '50%');
-    memberImageTag.addEventListener('mouseleave', (event) => event.target.style.opacity = '100%');
-
-    memberImageTag.className = 'member-photo'
-    
+    // Add silhouette if headshot does not exist
     fetch(headshot).then(function(response) {
-        if (response.status == 200) {
-          memberImageTag.src = headshot
-        } else {
-          memberImageTag.src = headshotSilhouette
-        }
-      })
-
+      if (response.status == 200) {
+        headshotTag.src = headshot
+      } else {
+        headshotTag.src = headshotSilhouette
+      }
+    })
 
     const cardColumn = document.createElement('div')
     cardColumn.className = 'column'
@@ -88,7 +85,7 @@ function membersList(senators) {
     card.className = 'card'
     pTag.textContent = firstLastName
 
-    card.appendChild(memberImageTag)
+    card.appendChild(headshotTag)
     card.appendChild(pTag)
     
     cardList.appendChild(card)
