@@ -33,7 +33,6 @@ function democratSenators() {
 const idDemocrats = document.getElementById('democrats-btn');
 idDemocrats.addEventListener('click', event => democratSenators())
 
-
 function republicanSenators() {
   members.innerHTML = ''
   const republicansFilter = allSenators.filter(member => member.party == 'R')
@@ -41,7 +40,6 @@ function republicanSenators() {
 };
 const idRepublicans = document.getElementById('republicans-btn')
 idRepublicans.addEventListener('click', event => republicanSenators())
-
 
 function independentSenators() {
   members.innerHTML = ''
@@ -53,21 +51,21 @@ idIndependents.addEventListener('click', event => independentSenators())
 
 
 function membersList(senators) {
-  for (senator of senators) {
-    const firstLastName = `${senator.first_name} ${senator.last_name}`
-
+  for (s of senators) {
+    const firstLastName = `${s.first_name} ${s.last_name}`
+    
     const headshotImageTag = document.createElement('img')
-    headshotImage(headshotImageTag)
+    renderHeadshot(headshotImageTag)
 
     const cardColumn = document.createElement('div')
     cardColumn.className = 'column'
-
+    
     const card = document.createElement('div')
     card.className = 'card'
     
     const nameTag = document.createElement('p')
     nameTag.textContent = firstLastName
-
+    
     card.appendChild(headshotImageTag)
     card.appendChild(nameTag)
     
@@ -76,15 +74,16 @@ function membersList(senators) {
 };
 
 
-function headshotImage(imageTag) {
-  let headshot = `https://theunitedstates.io/images/congress/225x275/${senator.id}.jpg`
-  let headshotSilhouette = 'https://static.propublica.org/rails/assets/congress/silhouette_male-eb244690d4f7eee39ace3ca9cb41fa44f908b1677ba256fc2522496917d2af02.png'
+function renderHeadshot(imageTag) {
+  const headshot = `https://theunitedstates.io/images/congress/225x275/${s.id}.jpg`
+  const headshotSilhouette = 'https://static.propublica.org/rails/assets/congress/silhouette_male-eb244690d4f7eee39ace3ca9cb41fa44f908b1677ba256fc2522496917d2af02.png'
   
   imageTag.className = 'member-headshot'
   imageTag.addEventListener('mouseenter', (event) => event.target.style.opacity = '50%');
   imageTag.addEventListener('mouseleave', (event) => event.target.style.opacity = '100%');
   imageTag.addEventListener('click', (event) => memberDetails());
   
+
   // Add silhouette if headshot does not exist
   fetch(headshot).then(function(response) {
     if (response.status == 200) {
@@ -93,24 +92,31 @@ function headshotImage(imageTag) {
       imageTag.src = headshotSilhouette
     }
   })
+
 }
 
 
 function memberDetails() {
   members.innerHTML = ''
 
-  console.log(senator)
+  const headshotImageTag = document.createElement('img')
+  renderHeadshot(headshotImageTag)
 
   const detailName = document.createElement('p')
-  detailName.textContent = `Name: ${senator.first_name} ${senator.last_name}`;
+    detailName.textContent = `Name: ${s.first_name} ${s.last_name}`;
   const detailTitle = document.createElement('p')
-  detailTitle.textContent = `Title: ${senator.title}`;
+    detailTitle.textContent = `Title: ${s.title}`;
   const detailParty = document.createElement('p')
-  detailParty.textContent = `Party: ${senator.party}`;
+    detailParty.textContent = `Party: ${s.party}`;
   const detailDob = document.createElement('p')
-  detailDob.textContent = `DOB: ${senator.date_of_birth}`;
+    detailDob.textContent = `DOB: ${s.date_of_birth}`;
   const detailGender = document.createElement('p')
-  detailGender.textContent = `Gender: ${senator.gender}`;
+    detailGender.textContent = `Gender: ${s.gender}`;
 
-  members.append(detailName, detailTitle, detailParty, detailDob, detailGender)
+  const detailCard = document.createElement('div')
+    detailCard.className = 'detailCard'
+
+  detailCard.appendChild(headshotImageTag)
+
+  members.append(detailCard, detailName, detailTitle, detailParty, detailDob, detailGender)
 };
