@@ -52,11 +52,14 @@ idIndependents.addEventListener('click', event => independentSenators())
 
 function membersList(senators) {
   for (s of senators) {
-    const firstLastName = `${s.first_name} ${s.last_name}`
+    const senator = s;
+
+    const firstLastName = `${senator.first_name} ${senator.last_name}`
     
     const headshotImageTag = document.createElement('img')
-    renderHeadshot(headshotImageTag)
 
+    renderHeadshot(senator, headshotImageTag)
+    
     const cardColumn = document.createElement('div')
     cardColumn.className = 'column'
     
@@ -74,44 +77,45 @@ function membersList(senators) {
 };
 
 
-function renderHeadshot(imageTag) {
-  const headshot = `https://theunitedstates.io/images/congress/225x275/${s.id}.jpg`
+function renderHeadshot(senator, headshotImageTag) {
+  const headshot = `https://theunitedstates.io/images/congress/225x275/${senator.id}.jpg`
   const headshotSilhouette = 'https://static.propublica.org/rails/assets/congress/silhouette_male-eb244690d4f7eee39ace3ca9cb41fa44f908b1677ba256fc2522496917d2af02.png'
   
-  imageTag.className = 'member-headshot'
-  imageTag.addEventListener('mouseenter', (event) => event.target.style.opacity = '50%');
-  imageTag.addEventListener('mouseleave', (event) => event.target.style.opacity = '100%');
-  imageTag.addEventListener('click', (event) => memberDetails());
-  
+
+  headshotImageTag.className = 'member-headshot'
+  headshotImageTag.addEventListener('mouseenter', (event) => event.target.style.opacity = '50%');
+  headshotImageTag.addEventListener('mouseleave', (event) => event.target.style.opacity = '100%');
+  headshotImageTag.addEventListener('click', (event) => memberDetails(senator, headshotImageTag));
 
   // Add silhouette if headshot does not exist
   fetch(headshot).then(function(response) {
     if (response.status == 200) {
-      imageTag.src = headshot
+      headshotImageTag.src = headshot
+      return headshotImageTag
     } else {
-      imageTag.src = headshotSilhouette
+      headshotImageTag.src = headshotSilhouette
+      return headshotImageTag
     }
   })
-
 }
 
 
-function memberDetails() {
+function memberDetails(senator, headshotImageTag) {
   members.innerHTML = ''
 
-  const headshotImageTag = document.createElement('img')
-  renderHeadshot(headshotImageTag)
+  // const headshotImageTag = document.createElement('img')
+  renderHeadshot(senator,headshotImageTag)
 
   const detailName = document.createElement('p')
-    detailName.textContent = `Name: ${s.first_name} ${s.last_name}`;
+    detailName.textContent = `Name: ${senator.first_name} ${senator.last_name}`;
   const detailTitle = document.createElement('p')
-    detailTitle.textContent = `Title: ${s.title}`;
+    detailTitle.textContent = `Title: ${senator.title}`;
   const detailParty = document.createElement('p')
-    detailParty.textContent = `Party: ${s.party}`;
+    detailParty.textContent = `Party: ${senator.party}`;
   const detailDob = document.createElement('p')
-    detailDob.textContent = `DOB: ${s.date_of_birth}`;
+    detailDob.textContent = `DOB: ${senator.date_of_birth}`;
   const detailGender = document.createElement('p')
-    detailGender.textContent = `Gender: ${s.gender}`;
+    detailGender.textContent = `Gender: ${senator.gender}`;
 
   const detailCard = document.createElement('div')
     detailCard.className = 'detailCard'
