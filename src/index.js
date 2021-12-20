@@ -79,16 +79,17 @@ function membersList(senators) {
 
 function opacity50(event) {
   event.target.style.opacity = '50%'
-}
+};
 function opacity100(event) {
   event.target.style.opacity = '100%'
-}
+};
 function cursorPointer(event) {
   event.target.style.cursor = 'pointer'
-}
+};
 function cursorDefault(event) {
   event.target.style.cursor = 'auto'
-}
+};
+
 
 function renderHeadshot(senator, headshotImageTag) {
   const headshot = `https://theunitedstates.io/images/congress/225x275/${senator.id}.jpg`
