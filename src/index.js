@@ -77,14 +77,29 @@ function membersList(senators) {
 };
 
 
+function opacity50(event) {
+  event.target.style.opacity = '50%'
+}
+function opacity100(event) {
+  event.target.style.opacity = '100%'
+}
+function cursorPointer(event) {
+  event.target.style.cursor = 'pointer'
+}
+function cursorDefault(event) {
+  event.target.style.cursor = 'auto'
+}
+
 function renderHeadshot(senator, headshotImageTag) {
   const headshot = `https://theunitedstates.io/images/congress/225x275/${senator.id}.jpg`
   const headshotSilhouette = 'https://static.propublica.org/rails/assets/congress/silhouette_male-eb244690d4f7eee39ace3ca9cb41fa44f908b1677ba256fc2522496917d2af02.png'
-  
 
+  headshotImageTag.style.opacity = '50%'
   headshotImageTag.className = 'member-headshot'
-  headshotImageTag.addEventListener('mouseenter', (event) => event.target.style.opacity = '50%');
-  headshotImageTag.addEventListener('mouseleave', (event) => event.target.style.opacity = '100%');
+  headshotImageTag.addEventListener('mouseenter', cursorPointer);
+
+  headshotImageTag.addEventListener('mouseenter', opacity100);
+  headshotImageTag.addEventListener('mouseleave', opacity50);
   headshotImageTag.addEventListener('click', (event) => memberDetails(senator, headshotImageTag));
 
   // Add silhouette if headshot does not exist
@@ -97,14 +112,16 @@ function renderHeadshot(senator, headshotImageTag) {
       return headshotImageTag
     }
   })
-}
+};
 
 
 function memberDetails(senator, headshotImageTag) {
   members.innerHTML = ''
 
-  // const headshotImageTag = document.createElement('img')
-  renderHeadshot(senator,headshotImageTag)
+  headshotImageTag.style.opacity = '100%';
+  headshotImageTag.addEventListener('mouseenter', cursorDefault);
+  headshotImageTag.removeEventListener('mouseenter', opacity100);
+  headshotImageTag.removeEventListener('mouseleave', opacity50);
 
   const detailName = document.createElement('p')
     detailName.textContent = `Name: ${senator.first_name} ${senator.last_name}`;
@@ -117,10 +134,10 @@ function memberDetails(senator, headshotImageTag) {
   const detailGender = document.createElement('p')
     detailGender.textContent = `Gender: ${senator.gender}`;
 
-  const detailCard = document.createElement('div')
-    detailCard.className = 'detailCard'
+  const detailCard = document.createElement('div');
+    detailCard.className = 'detailCard';
 
-  detailCard.appendChild(headshotImageTag)
+  detailCard.appendChild(headshotImageTag);
 
-  members.append(detailCard, detailName, detailTitle, detailParty, detailDob, detailGender)
+  members.append(detailCard, detailName, detailTitle, detailParty, detailDob, detailGender);
 };
