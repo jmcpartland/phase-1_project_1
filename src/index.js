@@ -21,7 +21,10 @@ function getSenators() {
 };
 
 function returnedData(data) {
-  return data.results[0].members.forEach(name => allSenators.push(name))
+  return data.results[0].members.forEach(name => {
+    allSenators.push(name)
+    name.follow = false
+  })
 };
 
 
@@ -53,25 +56,43 @@ idIndependents.addEventListener('click', event => independentSenators())
 function membersList(senators) {
   for (s of senators) {
     const senator = s;
-
     const firstLastName = `${senator.first_name} ${senator.last_name}`
-    
     const headshotImageTag = document.createElement('img')
+    const cardColumn = document.createElement('div')
+    const card = document.createElement('div')
+    const nameTag = document.createElement('p')
+
+    const followBtn = document.createElement('button')
+    const followBtnText = function() {
+      if (senator.follow === false) {
+        return 'Follow'
+      } else {
+        return 'Following'
+      }
+    };
+
+    followBtn.textContent = followBtnText()
+    followBtn.addEventListener('click', (event) => followCallback(senator))
+    
+    function followCallback(senator) {
+      if (senator.follow === false) {
+        followBtn.textContent = 'Following'
+        senator.follow = true
+      } else {
+        followBtn.textContent = 'Follow'
+        senator.follow = false
+      }
+    };
 
     renderHeadshot(senator, headshotImageTag)
     
-    const cardColumn = document.createElement('div')
-    cardColumn.className = 'column'
-    
-    const card = document.createElement('div')
+    cardColumn.className = 'column'    
     card.className = 'card'
-    
-    const nameTag = document.createElement('p')
+    followBtn.className = 'follow-button'
     nameTag.textContent = firstLastName
-    
+
     card.appendChild(headshotImageTag)
-    card.appendChild(nameTag)
-    
+    card.append(nameTag, followBtn)
     members.appendChild(card)
   }
 };
@@ -123,6 +144,9 @@ function memberDetails(senator, headshotImageTag) {
   headshotImageTag.addEventListener('mouseenter', cursorDefault);
   headshotImageTag.removeEventListener('mouseenter', opacity100);
   headshotImageTag.removeEventListener('mouseleave', opacity50);
+  
+  const detailCard = document.createElement('div');
+    detailCard.className = 'detailCard';
 
   const detailName = document.createElement('p')
     detailName.textContent = `Name: ${senator.first_name} ${senator.last_name}`;
@@ -135,8 +159,6 @@ function memberDetails(senator, headshotImageTag) {
   const detailGender = document.createElement('p')
     detailGender.textContent = `Gender: ${senator.gender}`;
 
-  const detailCard = document.createElement('div');
-    detailCard.className = 'detailCard';
 
   detailCard.appendChild(headshotImageTag);
 

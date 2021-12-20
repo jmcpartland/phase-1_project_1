@@ -2,7 +2,7 @@ h1, h3, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-button {
+.party-btn {
   background-color: blue;
   border-radius: 15px;
   border: 2px solid blue;
