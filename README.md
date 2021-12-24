@@ -6,38 +6,15 @@ Currently in this version, you can see a list of senators by party, choose to fo
 
 ## Installation
 
+Fork this project and open index.html in a web browser.
 
 
-
-
-
-
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
-```bash
-pip install foobar
-```
 
 ## Usage
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
+After opening index.html, you can click the button with the political party you want to see a list of senators belonging to that party. Once the list of senators appear on the screen, you can click Follow to start following them. Also, you can click the image of any senator to see more information about them.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
