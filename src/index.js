@@ -8,7 +8,7 @@ const propublicaKey = 'tNm5YIP9zO7SCYymYDfjB73IRmhUzMmC8beETVXI'
 
 const members = document.querySelector('.members')
 
-let allSenators = [];
+const allSenators = [];
 
 function getSenators() {
   fetch(senateMembers, {

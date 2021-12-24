@@ -1,8 +1,8 @@
 ### Phase 1 Project
 # United States Senators
 
-This project is the beginning of a larger project to track United States Congress and the Bills they support.
-Currently, in this version, you can see a list of Senators by Party. You can choose to follow any senator and find some basic information about each one.
+This project is the beginning of a larger project to track United States Congress men and women and the bills they support.
+Currently in this version, you can see a list of senators by party, choose to follow any senator and find some basic information about each one.
 
 ## Installation
 
