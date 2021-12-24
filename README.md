@@ -17,4 +17,8 @@ After opening index.html, you can click the button with the political party you 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+<<<<<<< HEAD
 Please make sure to update tests as appropriate.
+=======
+Please make sure to update tests as appropriate.
+>>>>>>> 8a65bd56a369660628d82263656f4a6edc591a30
