@@ -54,8 +54,8 @@ idIndependents.addEventListener('click', event => independentSenators())
 
 
 function membersList(senators) {
-  for (s of senators) {
-    const senator = s;
+  for (sen of senators) {
+    const senator = sen;
     const firstLastName = `${senator.first_name} ${senator.last_name}`
     const headshotImageTag = document.createElement('img')
     const card = document.createElement('div')
