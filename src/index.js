@@ -136,7 +136,6 @@ function renderHeadshot(senator, headshotImageTag) {
   })
 };
 
-
 function memberDetails(senator, headshotImageTag) {
   members.innerHTML = ''
 
